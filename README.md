@@ -28,6 +28,8 @@ waitress-serve --listen 127.0.0.1:5000 predict:predict
 From other terminal session from the cloned project directory, execute the following command to make a request to this web service:
 
 python predict.py
+The result would be like this: 
+
 ![Capture](https://user-images.githubusercontent.com/62038461/150739695-de58bcc5-6da6-4f55-ae82-02747a350691.PNG)
 
 
@@ -38,14 +40,14 @@ Pre-requisites: You should have Docker installed and running on the machine wher
 
 systemctl status docker docker ps -a Following are the steps to do this:
 
-Clone this repo (if you have not done this already. If done then skip this step) Change to the directory that has the model file, python script (predict.py) for the web service and other required files cd mlzoomcamp-third-project/app-deploy Build docker image named Customer_Personality_Analysis docker build -t "Customer_Personality_Analysis" . Check docker image available. Output of below command should show the image with name Customer_Personality_Analysis docker images Create a docker container from the image. The model prediction script as a web service will then be running inside this container. Below command will create and run a docker container named Customer_Personality (--name Customer_Personality) running as a daemon i.e. non-interactive mode (-d), mapping the port 9696 on host to port 9696 on container (-p 9696:9696 first port is host port, second is container port. If you want to map different port on host just change the first number), from image bank-td-prediction. The container will be deleted if stopped or when you shutdown your machine (--rm).
+Clone this repo (if you have not done this already. If done then skip this step) Change to the directory that has the model file, python script (predict.py) for the web service and other required files cd mlzoomcamp-third-project/app-deploy Build docker image named Uber_Fare_Pricing docker build -t "Uber_Fare_Pricing" . Check docker image available. Output of below command should show the image with name Uber_Fare_Pricing docker images Create a docker container from the image. The model prediction script as a web service will then be running inside this container. Below command will create and run a docker container named Uber_Fare_Pricing (--name Uber_Fare_Pricing) running as a daemon i.e. non-interactive mode (-d), mapping the port 5000 on host to port 5000 on container (-p 5000:5000 first port is host port, second is container port. If you want to map different port on host just change the first number), from image Uber_Fare_Pricing. The container will be deleted if stopped or when you shutdown your machine (--rm).
 
-docker run --rm --name predict -d -p 9696:9696 Customer_Personality_Analysis
+docker run --rm --name predict -d -p 5000:5000 Uber_Fare_Pricing
 
 Check whether docker container running. Below command should show the container in Running state and not Exited.
 
 docker ps -a
 
-Test sending some sample customer data to the web service and see the results. For this you can use the request.py script provided as part of this repo, which has some sample customer entries and can make a request to the Web app service. Ensure you have activated the virtual environment as explained in 4. Virtual environment and package dependencies. Check whether you are already in the project directory which you cloned from git. If not change to that directory.
+Test sending some sample customer data to the web service and see the results. For this you can use the predict.py script provided as part of this repo, which has some sample customer entries and can make a request to the Web app service. Ensure you have activated the virtual environment as explained in 4. Virtual environment and package dependencies. Check whether you are already in the project directory which you cloned from git. If not change to that directory.
 
 python predict.py
