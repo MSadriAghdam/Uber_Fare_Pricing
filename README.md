@@ -2,8 +2,8 @@
 
 DataSet : https://www.kaggle.com/nivednambiar/uber-fare-pricing-predictor/data
 
-Goal: Analysis of company's ideal customers
-Please notice this is a clustering model(unsupervide learning) that is why there is no train and test dataset.
+Goal: Analysis of fare price for UBER customers based on different featurs.
+
 Problem Statement:
 The dataset contains information about passengers trips using UBER cars. Here we have information about their trip date and time alongside the atitude and longitude of pickup and dropoff points and number of passengers. The aim of the project is to use a regression model to predict the fare price for a trip.
 
@@ -28,6 +28,8 @@ waitress-serve --listen 127.0.0.1:5000 predict:predict
 From other terminal session from the cloned project directory, execute the following command to make a request to this web service:
 
 python predict.py
+![Capture](https://user-images.githubusercontent.com/62038461/150739695-de58bcc5-6da6-4f55-ae82-02747a350691.PNG)
+
 
 Deploy model as a web service to Docker container
 You can deploy the trained model as a web service running inside a docker container on your local machine.
@@ -36,7 +38,7 @@ Pre-requisites: You should have Docker installed and running on the machine wher
 
 systemctl status docker docker ps -a Following are the steps to do this:
 
-Clone this repo (if you have not done this already. If done then skip this step) Change to the directory that has the model file, python script (predict.py) for the web service and other required files cd mlzoomcamp-midterm-project/app-deploy Build docker image named Customer_Personality_Analysis docker build -t "Customer_Personality_Analysis" . Check docker image available. Output of below command should show the image with name Customer_Personality_Analysis docker images Create a docker container from the image. The model prediction script as a web service will then be running inside this container. Below command will create and run a docker container named Customer_Personality (--name Customer_Personality) running as a daemon i.e. non-interactive mode (-d), mapping the port 9696 on host to port 9696 on container (-p 9696:9696 first port is host port, second is container port. If you want to map different port on host just change the first number), from image bank-td-prediction. The container will be deleted if stopped or when you shutdown your machine (--rm).
+Clone this repo (if you have not done this already. If done then skip this step) Change to the directory that has the model file, python script (predict.py) for the web service and other required files cd mlzoomcamp-third-project/app-deploy Build docker image named Customer_Personality_Analysis docker build -t "Customer_Personality_Analysis" . Check docker image available. Output of below command should show the image with name Customer_Personality_Analysis docker images Create a docker container from the image. The model prediction script as a web service will then be running inside this container. Below command will create and run a docker container named Customer_Personality (--name Customer_Personality) running as a daemon i.e. non-interactive mode (-d), mapping the port 9696 on host to port 9696 on container (-p 9696:9696 first port is host port, second is container port. If you want to map different port on host just change the first number), from image bank-td-prediction. The container will be deleted if stopped or when you shutdown your machine (--rm).
 
 docker run --rm --name predict -d -p 9696:9696 Customer_Personality_Analysis
 
